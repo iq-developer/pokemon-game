@@ -2,14 +2,14 @@ import style from './style.module.css';
 
 const Layout = () => {
   return (
-    <section class="root">
-      <div class="wrapper">
+    <section className={style.root}>
+      <div className={style.wrapper}>
         <article>
-            <div class="title">
+            <div className={style.title}>
                 {/* <h3><-- ЗДЕСЬ props.title --> </h3> */}
-                <span class="separator"></span>
+                <span className={style.separator}></span>
             </div>
-            <div class="desc full">
+            <div className={style.desc + style.full}>
                 {/* <p><-- ЗДЕСЬ props.desc --></p> */}
             </div>
         </article>
