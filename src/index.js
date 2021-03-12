@@ -4,14 +4,16 @@ import "./index.css";
 import Header from "./components/Header";
 import Layout from "./components/Layout";
 import Footer from "./components/Footer";
+// import Bg1 from ".assets/bg1.jpg";
+// console.log(Bg1);
 
 const App = () => {
   return (
     <>
-      <Header title='' descr='' />
-      <Layout title='' descr='' urlBg='' colorBg='' />
-      <Layout title='' descr='' colorBg='' />
-      <Layout title='' descr='' urlBg='' colorBg='' />
+      <Header title='Header title' descr='Header description' />
+      <Layout title='Layout1 title' descr='Layout1 description' urlBg='' colorBg='' />
+      <Layout title='Layout2 title' descr='Layout2 description' colorBg='' />
+      <Layout title='Layout3 title' descr='Layout3 description' urlBg='' colorBg='' />
       <Footer />
     </>
   );
