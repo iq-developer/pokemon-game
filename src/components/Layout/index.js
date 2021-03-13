@@ -1,10 +1,21 @@
 import style from './style.module.css';
 
-const Layout = ({title, descr, urlBg, colorBg}) => {
-  const bg = urlBg ? {background: `url(${urlBg}) ${colorBg}`} : {background: `${colorBg}`};
+const Layout = ({title, descr, urlBg, colorBg, children}) => {
+  
+  const bgStyle = {};
+
+  if (urlBg){
+    bgStyle.backgroundImage = `url(${urlBg})`;
+  }
+  if (urlBg){
+    bgStyle.backgroundColor = {colorBg};
+  }
 
   return (
-    <section className={style.root} style={bg}>
+    <section
+      className={style.root}
+      style={bgStyle}
+    >
       <div className={style.wrapper}>
         <article>
             <div className={style.title}>
@@ -13,6 +24,7 @@ const Layout = ({title, descr, urlBg, colorBg}) => {
             </div>
             <div className={style.desc + ' ' + style.full}>
                 <p>{descr}</p>
+                {children}
             </div>
         </article>
       </div>
