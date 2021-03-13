@@ -1,5 +1,4 @@
 import style from './style.module.css';
-// import logo from '../logo.svg';
 
 const Header = () => {
   return (
