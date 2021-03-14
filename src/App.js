@@ -8,6 +8,7 @@ import bg1 from "./assets/bg1.jpg";
 import bg3 from "./assets/bg3.jpg";
 import pokemons from "./data.json"
 
+//console.log(pokemons);
 
 const App = () => {
   return (
@@ -30,7 +31,7 @@ const App = () => {
       >
         <div className='flex'>
           {
-            pokemons.map(item => <PokemonCard {...item} />)
+            pokemons.map(item => <PokemonCard key={item.id} id={item.id} name={item.name} type={item.type} values={item.values} img={item.img} />)
           }
         </div>
       </Layout>
