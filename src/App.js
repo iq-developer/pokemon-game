@@ -1,9 +1,13 @@
 import "./index.css";
+import "./App.css";
 import Header from "./components/Header";
 import Layout from "./components/Layout";
 import Footer from "./components/Footer";
+import PokemonCard from "./PokemonCard";
 import bg1 from "./assets/bg1.jpg";
 import bg3 from "./assets/bg3.jpg";
+import pokemons from "./data.json"
+
 
 const App = () => {
   return (
@@ -22,9 +26,14 @@ const App = () => {
       </Layout>
       <Layout
         title='Layout2 title'
-        descr='Layout2 description'
         colorBg='#e2e2e2'
-      />
+      >
+        <div className='flex'>
+          {
+            pokemons.map(item => <PokemonCard {...item} />)
+          }
+        </div>
+      </Layout>
       <Layout
         title='Layout3 title'
         descr='Layout3 description'
