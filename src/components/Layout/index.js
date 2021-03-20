@@ -1,4 +1,4 @@
-import style from './style.module.css';
+import s from './style.module.css';
 
 const Layout = ({title, descr, urlBg, colorBg, children}) => {
   
@@ -13,16 +13,16 @@ const Layout = ({title, descr, urlBg, colorBg, children}) => {
 
   return (
     <section
-      className={style.root}
+      className={s.root}
       style={bgStyle}
     >
-      <div className={style.wrapper}>
+      <div className={s.wrapper}>
         <article>
-            <div className={style.title}>
+            <div className={s.title}>
                 <h3>{title}</h3>
-                <span className={style.separator}></span>
+                <span className={s.separator}></span>
             </div>
-            <div className={style.desc + ' ' + style.full}>
+            <div className={s.desc + ' ' + s.full}>
                 <p>{descr}</p>
                 {children}
             </div>

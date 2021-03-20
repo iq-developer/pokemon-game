@@ -1,5 +1,5 @@
 import "./../../index.css";
-import "./style.module.css";
+import s from "./style.module.css";
 
 import Header from "./../../components/Header";
 import Layout from "./../../components/Layout";
@@ -42,7 +42,7 @@ const HomePage = ({onChangePage}) => {
         title='Layout2 title'
         colorBg='#e2e2e2'
       >
-        <div className='flex'>
+        <div className={s.flex}>
           {
             pokemons.map(item => <PokemonCard key={item.id} id={item.id} name={item.name} type={item.type} values={item.values} img={item.img} />)
           }
