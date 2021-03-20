@@ -24,7 +24,7 @@ const HomePage = ({onChangePage}) => {
 
   return (
     <>
-      <MenuHeader />
+      {/* <MenuHeader /> */}
       <Header
         title='Pokemon Game'
         descr='short description of the game'
