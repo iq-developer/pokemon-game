@@ -1,18 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import {useState} from 'react';
+import GamePage from './routes/Game';
+import HomePage from './routes/Home';
+import database from './service/firebase';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        Hello World, React.JS
-      </header>
-    </div>
-  );
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
+
+database.ref('pokemons').once('value', (snapshot) => {
+  console.log('####: snapshot', snapshot.val());
+});
+
+const App = () => {
+  const [page, setPage] = useState('app');
+
+  const handleChangePage = (page) => {
+    console.log('###: <Main />');
+    setPage(page);
+  }
+
+  // <BrowserRouter>
+  //   <Switch>
+  //     <Route path='/' exact component={HomePage} />
+  //     <Route path='/game' component={GamePage} />
+  //     <Route render={() => {
+  //       <h1>404 non found</h1>
+  //     }} />
+  //   </Switch>
+  // </BrowserRouter>
+
+
+  switch (page) {
+    case 'app':
+      return <HomePage onChangePage={handleChangePage} />
+    case 'game':
+      return <GamePage onChangePage={handleChangePage} />
+    default:
+      return <HomePage />
+  }
+
 }
 
 export default App;
