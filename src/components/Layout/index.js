@@ -8,7 +8,7 @@ const Layout = ({title, descr, urlBg, colorBg, children}) => {
     bgStyle.backgroundImage = `url(${urlBg})`;
   }
   if (urlBg){
-    bgStyle.backgroundColor = {colorBg};
+    bgStyle.backgroundColor = '#e2e2e2';
   }
 
   return (
