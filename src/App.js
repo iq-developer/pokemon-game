@@ -3,8 +3,8 @@ import {useRouteMatch, Route, Switch, Redirect} from 'react-router-dom';
 import database from './service/firebase';
 import cn from 'classnames';
 
-import GamePage from './routes/Game';
-import HomePage from './routes/Home';
+import GamePage from './routes/GamePage';
+import HomePage from './routes/HomePage';
 
 import AboutPage from './routes/AboutPage';
 import ContactPage from './routes/ContactPage';
