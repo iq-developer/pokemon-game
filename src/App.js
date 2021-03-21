@@ -1,18 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import {useState} from 'react';
+import GamePage from './routes/Game';
+import HomePage from './routes/Home';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        Hello World, React.JS
-      </header>
-    </div>
-  );
+const App = () => {
+  const [page, setPage] = useState('app');
+
+  const handleChangePage = (page) => {
+    console.log('###: <Main />');
+    setPage(page);
+  }
+
+  switch (page) {
+    case 'app':
+      return <HomePage onChangePage={handleChangePage} />
+    case 'game':
+      return <GamePage onChangePage={handleChangePage} />
+    default:
+      return <HomePage />
+  }
 }
 
 export default App;
