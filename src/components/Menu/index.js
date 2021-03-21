@@ -4,19 +4,19 @@ import cn from 'classnames';
 const MENU = [
   {
     title: 'HOME',
-    to: '#wellcome',
+    to: '/',
   },
   {
     title: 'GAME',
-    to: '#game',
+    to: 'game',
   },
   {
     title: 'ABOUT',
-    to: '#about',
+    to: 'about',
   },
   {
     title: 'CONTACT',
-    to: '#contact',
+    to: 'contact',
   },
   
 ]
@@ -42,29 +42,6 @@ const Menu = ({isOpen}) => {
               </li>              
             ))
           }
-        </ul>
-
-        <ul>
-          <li>
-            <a href="#welcome">
-              HOME
-            </a>
-          </li>
-          <li>
-            <a href="#game">
-              GAME
-            </a>
-          </li>
-          <li>
-            <a href="#about">
-              ABOUT
-            </a>
-          </li>
-          <li>
-            <a href="#contact">
-              CONTACT
-            </a>
-          </li>
         </ul>
       </div>
 

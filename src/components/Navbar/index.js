@@ -3,10 +3,10 @@ import cn from 'classnames';
 
 const Navbar = ({isOpen, bgActive = false, onClickHamburg}) => {
   return (
-    <nav id={s.navbar} className={cn({
+    <nav className={cn(s.root, {
       [s.bgActive]: bgActive
     })}>
-      <div className={s.navWrapper}>
+      <div className={s.navWrapper} onClick={onClickHamburg}>
         <p className={s.brand}>
           LOGO
         </p>
