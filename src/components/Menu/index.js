@@ -1,5 +1,6 @@
 import s from './style.module.css';
 import cn from 'classnames';
+import {Link} from 'react-router-dom';
 
 const MENU = [
   {
@@ -20,7 +21,12 @@ const MENU = [
   },
 ]
 
-const Menu = ({isOpen}) => {
+const Menu = ({isOpen, onClickHamburg}) => {
+
+  const handleClickMenu = ({onClickHamburg}) => {
+    onClickHamburg();
+  }
+
   return (
     <div className={cn(s.menuContainer, {
       [s.active]: isOpen === true,
@@ -33,9 +39,9 @@ const Menu = ({isOpen}) => {
           {
             MENU.map((item, index) => (
               <li key={index}>
-                <a href={item.to}>
+                <Link to={item.to} onClick={onClickHamburg}>
                   {item.title}
-                </a>
+                </Link>
               </li>
             ))
           }
