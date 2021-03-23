@@ -23,10 +23,6 @@ const MENU = [
 
 const Menu = ({isOpen, onClickHamburg}) => {
 
-  const handleClickMenu = ({onClickHamburg}) => {
-    onClickHamburg();
-  }
-
   return (
     <div className={cn(s.menuContainer, {
       [s.active]: isOpen === true,
