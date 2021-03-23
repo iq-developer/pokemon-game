@@ -18,10 +18,7 @@ const MENU = [
     title: 'CONTACT',
     to: 'contact',
   },
-  
 ]
-
-
 
 const Menu = ({isOpen}) => {
   return (
@@ -30,16 +27,16 @@ const Menu = ({isOpen}) => {
       [s.deactive]: isOpen === false,
     })}>
       <div className={s.overlay} />
-      
+
       <div className={s.menuItems}>
         <ul>
           {
-            MENU.map((item, index) => (            
+            MENU.map((item, index) => (
               <li key={index}>
                 <a href={item.to}>
                   {item.title}
                 </a>
-              </li>              
+              </li>
             ))
           }
         </ul>
