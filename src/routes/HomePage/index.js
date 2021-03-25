@@ -4,15 +4,10 @@ import s from "./style.module.css";
 import Header from "../../components/Header";
 import Layout from "../../components/Layout";
 import Footer from "../../components/Footer";
-import PokemonCard from "../../PokemonCard";
 import MenuHeader from "../../components/MenuHeader";
 
 import bg1 from "./../../assets/bg1.jpg";
 import bg3 from "./../../assets/bg3.jpg";
-
-import pokemons from "../../data.json"
-
-//console.log(pokemons);
 
 const HomePage = ({onChangePage}) => {
 
@@ -20,7 +15,6 @@ const HomePage = ({onChangePage}) => {
     console.log('####: <HomePage />');
     onChangePage && onChangePage(page);
   }
-
 
   return (
     <>
@@ -42,7 +36,6 @@ const HomePage = ({onChangePage}) => {
         title='Layout2 title'
         colorBg='#e2e2e2'
       >
-
       </Layout>
       <Layout
         title='Layout3 title'
