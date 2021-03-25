@@ -160,6 +160,7 @@
   .silhouette {
       width: 100%;
   }
+
 }
 
 button,
@@ -216,4 +217,3 @@ button:disabled:hover {
     border: 1px solid transparent;
     color: #fafafa;
 }
-
