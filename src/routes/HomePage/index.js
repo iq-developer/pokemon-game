@@ -1,5 +1,4 @@
 import "./../../index.css";
-import s from "./style.module.css";
 
 import Header from "../../components/Header";
 import Layout from "../../components/Layout";
