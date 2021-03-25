@@ -1,14 +1,12 @@
-import {useState} from 'react';
 import cn from 'classnames';
 
 import s from './style.module.css';
 import cardBackSide from './../assets/card-back-side.jpg'
 
-const PokemonCard = ({name, id, values, type, img, minimize, className}) => {
-  const [isActive, setActive] = useState(false);
+const PokemonCard = ({name, id, values, type, img, handleActive, isActive}) => {
 
   const handleClick = () => {
-    setActive(!isActive);
+    handleActive(id);
   }
 
   return (
@@ -45,6 +43,5 @@ const PokemonCard = ({name, id, values, type, img, minimize, className}) => {
     </div>
   );
 };
-
 
 export default PokemonCard;
