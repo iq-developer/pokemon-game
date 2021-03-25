@@ -3,7 +3,7 @@ import cn from 'classnames';
 import s from './style.module.css';
 import cardBackSide from './../assets/card-back-side.jpg'
 
-const PokemonCard = ({name, id, values, type, img, handleActive, isActive}) => {
+const PokemonCard = ({name, id, values, type, img, handleActive, isActive, minimize, className}) => {
 
   const handleClick = () => {
     handleActive(id);
@@ -39,7 +39,7 @@ const PokemonCard = ({name, id, values, type, img, handleActive, isActive}) => {
       <div className={s.cardBack}>
           <div className={cn(s.wrap, s.back)} />
       </div>
-      
+
     </div>
   );
 };
