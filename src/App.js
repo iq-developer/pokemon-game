@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {useRouteMatch, Route, Switch, Redirect} from 'react-router-dom';
-import database from './service/firebase';
+
 import cn from 'classnames';
 
 import GamePage from './routes/GamePage';
@@ -15,9 +15,7 @@ import Footer from './components/Footer';
 
 import s from './style.module.css'
 
-database.ref('pokemons').once('value', (snapshot) => {
-  console.log('####: snapshot', snapshot.val());
-});
+
 
 const App = () => {
   const [page, setPage] = useState('app');
@@ -31,7 +29,7 @@ const App = () => {
   console.log('####: match', match);
 
   return (
-    
+
       <Switch>
         <Route path='/404' component={NotFound} />
         <Route>
@@ -54,7 +52,7 @@ const App = () => {
         </Route>
 
       </Switch>
-    
+
   );
 
   // switch (page) {
