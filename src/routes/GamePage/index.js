@@ -1,0 +1,73 @@
+import s from "./style.module.css";
+import {useState, useEffect} from 'react';
+import PokemonCard from "../../PokemonCard";
+import pokemons from "../../data.json"
+import database from '../../service/firebase';
+
+const GamePage = ({onChangePage}) => {
+
+  const [allPokemons, setAllPokemons] = useState({});
+
+  useEffect(() => {
+    database.ref('pokemons').once('value', (snapshot) => {
+      setAllPokemons(snapshot.val());
+      console.log('####: snapshot', snapshot.val());
+    });
+  }, []);
+
+  // разворот карточки
+  //const changeActive = (id) => {
+
+    // TODO: переписать через prevStat
+
+    //перезаписывает всех покемонов, добавля isActive в открытую карту
+
+    // setAllPokemons(prevState => {
+    //   return Object.entries(prevState).map(([key, value]) => {
+    //   if (value.id === id) {
+    //     value.isActive = true;
+    //     database.ref('pokemons/'+ key).set(value); // отправляем обновленного покемона в базу данных
+    //   } else {
+    //     value.isActive = false;
+    //   }
+    //   return value;
+    // })
+    // });
+
+
+    setAllPokemons(prevState => {
+      return Object.entries(prevState).reduce((acc, item) => {
+          const objID = item[0];
+          const pokemon = {...item[1]};
+          if (pokemon.id === id) {
+            pokemon.isActive = true;
+            database.ref('pokemons/'+ objID).set(pokemon);
+          };
+
+          acc[item[0]] = pokemon;
+
+          return acc;
+      }, {});
+    });
+
+  }
+
+  return (
+      <div className={s.flex}>
+          {
+            Object.entries(allPokemons).map(([key, value]) => <PokemonCard
+              key={value.id}
+              id={value.id}
+              name={value.name}
+              type={value.type}
+              values={value.values}
+              img={value.img}
+              isActive={value.isActive}
+              handleActive={changeActive}
+            />)
+          }
+      </div>
+  )
+}
+
+export default GamePage;
