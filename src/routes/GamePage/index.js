@@ -15,14 +15,8 @@ const GamePage = ({onChangePage}) => {
     });
   }, []);
 
-  // // objID - это тот самый непонятный ключ у нашего объекта.
-  // database.ref('pokemons/'+ objID).set({
-  // 	// Один item покемона
-  // });
-
-
   // разворот карточки
-  const changeActive = (id) => {
+  //const changeActive = (id) => {
 
     // TODO: переписать через prevStat
 
@@ -41,7 +35,6 @@ const GamePage = ({onChangePage}) => {
     // });
 
 
-    // для переворачивания карточек рабочий код Зака
     setAllPokemons(prevState => {
       return Object.entries(prevState).reduce((acc, item) => {
           const objID = item[0];
