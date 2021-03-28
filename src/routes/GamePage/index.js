@@ -27,36 +27,35 @@ const GamePage = ({onChangePage}) => {
     // TODO: переписать через prevStat
 
     //перезаписывает всех покемонов, добавля isActive в открытую карту
-    console.log('allPokemons0', allPokemons);
-    setAllPokemons(Object.entries(allPokemons).map(([key, value]) => {
-      if (value.id === id) {
-        value.isActive = true; // без обратного поворота
-        database.ref('pokemons/'+ key).set(value); // отправляем обновленного покемона в базу данных
-        console.log('key', key);
-        console.log('value', value);
-      } else {
-        value.isActive = false;
-      }
-      return value;
-    }));
-    console.log('allPokemons1', allPokemons);
+
+    // setAllPokemons(prevState => {
+    //   return Object.entries(prevState).map(([key, value]) => {
+    //   if (value.id === id) {
+    //     value.isActive = true;
+    //     database.ref('pokemons/'+ key).set(value); // отправляем обновленного покемона в базу данных
+    //   } else {
+    //     value.isActive = false;
+    //   }
+    //   return value;
+    // })
+    // });
+
 
     // для переворачивания карточек рабочий код Зака
-    // setAllPokemons(prevState => {
-    //   return Object.entries(prevState).reduce((acc, item) => {
-    //       //const objID = {...item[0]};
-    //       //console.log(objID);
-    //       const pokemon = {...item[1]};
-    //       if (pokemon.id === id) {
-    //         pokemon.isActive = true;
-    //         // database.ref('pokemons/'+ objID).set(pokemon);
-    //       };
+    setAllPokemons(prevState => {
+      return Object.entries(prevState).reduce((acc, item) => {
+          const objID = item[0];
+          const pokemon = {...item[1]};
+          if (pokemon.id === id) {
+            pokemon.isActive = true;
+            database.ref('pokemons/'+ objID).set(pokemon);
+          };
 
-    //       acc[item[0]] = pokemon;
+          acc[item[0]] = pokemon;
 
-    //       return acc;
-    //   }, {});
-    // });
+          return acc;
+      }, {});
+    });
 
   }
 
