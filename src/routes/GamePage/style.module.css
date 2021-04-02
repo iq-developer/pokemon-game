@@ -4,3 +4,7 @@
   align-items: center;
   flex-wrap: wrap;
 }
+
+.center {
+  margin: 50px 0 50px 40%;
+}

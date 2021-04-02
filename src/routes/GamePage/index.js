@@ -8,37 +8,31 @@ const GamePage = ({onChangePage}) => {
 
   const [allPokemons, setAllPokemons] = useState({});
 
+  const addNewPokemon = () => {
+    Object.entries(allPokemons).map(([key, value]) => {
+      if (value.id === 17) { // id определенного покемона
+        const pokemonToDb = {...value};
+        console.log('#pokemonToDb: ', pokemonToDb);
+        const newKey = database.ref().child('pokemons').push().key;
+        database.ref('pokemons/' + newKey).set(pokemonToDb);
+      }
+    });
+  }
+
   useEffect(() => {
     database.ref('pokemons').once('value', (snapshot) => {
       setAllPokemons(snapshot.val());
-      console.log('####: snapshot', snapshot.val());
     });
   }, []);
 
   // разворот карточки
-  //const changeActive = (id) => {
-
-    // TODO: переписать через prevStat
-
-    //перезаписывает всех покемонов, добавля isActive в открытую карту
-
-    // setAllPokemons(prevState => {
-    //   return Object.entries(prevState).map(([key, value]) => {
-    //   if (value.id === id) {
-    //     value.isActive = true;
-    //     database.ref('pokemons/'+ key).set(value); // отправляем обновленного покемона в базу данных
-    //   } else {
-    //     value.isActive = false;
-    //   }
-    //   return value;
-    // })
-    // });
-
-
-    setAllPokemons(prevState => {
+  const changeActive = (id) => {
+    setAllPokemons(prevState => { // перезаписывает всех покемонов, добавля isActive в открытую карту
       return Object.entries(prevState).reduce((acc, item) => {
           const objID = item[0];
+          console.log('objID: ', objID);
           const pokemon = {...item[1]};
+          console.log('pokemon: ', pokemon);
           if (pokemon.id === id) {
             pokemon.isActive = true;
             database.ref('pokemons/'+ objID).set(pokemon);
@@ -49,10 +43,11 @@ const GamePage = ({onChangePage}) => {
           return acc;
       }, {});
     });
-
   }
 
   return (
+      <>
+      <button className={s.center} onClick={addNewPokemon}>Add new pokemon</button>
       <div className={s.flex}>
           {
             Object.entries(allPokemons).map(([key, value]) => <PokemonCard
@@ -67,6 +62,7 @@ const GamePage = ({onChangePage}) => {
             />)
           }
       </div>
+      </>
   )
 }
 
