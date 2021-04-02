@@ -4,25 +4,18 @@ import PokemonCard from "../../PokemonCard";
 import pokemons from "../../data.json"
 import database from '../../service/firebase';
 
-const GamePage = ({onChangePage}) => {
+const GamePage = () => {
 
   const [allPokemons, setAllPokemons] = useState({});
 
-  const addNewPokemon = () => {
-    Object.entries(allPokemons).map(([key, value]) => {
-      if (value.id === 17) { // id определенного покемона
-        const pokemonToDb = {...value};
-        console.log('#pokemonToDb: ', pokemonToDb);
-        const newKey = database.ref().child('pokemons').push().key;
-        database.ref('pokemons/' + newKey).set(pokemonToDb);
-      }
+  const getPokemons = () => {
+    database.ref('pokemons').once('value', (snapshot) => {
+      setAllPokemons(snapshot.val());
     });
   }
 
   useEffect(() => {
-    database.ref('pokemons').once('value', (snapshot) => {
-      setAllPokemons(snapshot.val());
-    });
+    getPokemons();
   }, []);
 
   // разворот карточки
@@ -30,11 +23,9 @@ const GamePage = ({onChangePage}) => {
     setAllPokemons(prevState => { // перезаписывает всех покемонов, добавля isActive в открытую карту
       return Object.entries(prevState).reduce((acc, item) => {
           const objID = item[0];
-          console.log('objID: ', objID);
           const pokemon = {...item[1]};
-          console.log('pokemon: ', pokemon);
           if (pokemon.id === id) {
-            pokemon.isActive = true;
+            pokemon.isActive = !pokemon.isActive;
             database.ref('pokemons/'+ objID).set(pokemon);
           };
 
@@ -43,6 +34,52 @@ const GamePage = ({onChangePage}) => {
           return acc;
       }, {});
     });
+  }
+
+  // добавление покемона попытка через цикл - покемоны удваиваются
+  // const addNewPokemon = () => {
+  //   Object.entries(allPokemons).map(([key, value]) => {
+  //     if (value.id === 17) { // id определенного покемона
+  //       const pokemonToDb = {...value};
+  //       console.log('#pokemonToDb: ', pokemonToDb);
+  //       const newKey = database.ref().child('pokemons').push().key;
+  //       database.ref('pokemons/' + newKey).set(pokemonToDb).then(() => getPokemons());
+  //       //setAllPokemons({...allPokemons, newKey: pokemonToDb});
+  //     }
+  //   });
+  // }
+
+  const data = {
+    "abilities": [
+      "keen-eye",
+      "tangled-feet",
+      "big-pecks"
+    ],
+    "stats": {
+      "hp": 63,
+      "attack": 60,
+      "defense": 55,
+      "special-attack": 50,
+      "special-defense": 50,
+      "speed": 71
+    },
+    "type": "flying",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/17.png",
+    "name": "pidgeotto",
+    "base_experience": 122,
+    "height": 11,
+    "id": 17,
+    "values": {
+      "top": "A",
+      "right": 2,
+      "bottom": 7,
+      "left": 5
+    }
+  };
+
+  const addNewPokemon = () => {
+    const newKey = database.ref().child('pokemons').push().key;
+    database.ref('pokemons/' + newKey).set(data).then(() => getPokemons());
   }
 
   return (
