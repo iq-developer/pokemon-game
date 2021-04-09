@@ -1,21 +1,19 @@
 import s from "./style.module.css";
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import PokemonCard from "../../PokemonCard";
-import pokemons from "../../data.json"
 import database from '../../service/firebase';
+import { FirebaseContext } from "../../context/firebaseContext";
 
 const GamePage = () => {
-
+  const firebase = useContext(FirebaseContext);
   const [allPokemons, setAllPokemons] = useState({});
 
-  const getPokemons = () => {
-    database.ref('pokemons').once('value', (snapshot) => {
-      setAllPokemons(snapshot.val());
-    });
-  }
-
   useEffect(() => {
-    getPokemons();
+    firebase.getPokemonSoket((pokemons) => {
+      setAllPokemons(pokemons);
+    });
+
+    return () => firebase.offPokemonSoket();
   }, []);
 
   // разворот карточки
@@ -26,30 +24,19 @@ const GamePage = () => {
           const pokemon = {...item[1]};
           if (pokemon.id === id) {
             pokemon.isActive = !pokemon.isActive;
-            database.ref('pokemons/'+ objID).set(pokemon);
+            // database.ref('pokemons/'+ objID).set(pokemon);
           };
 
           acc[item[0]] = pokemon;
+
+          firebase.postPokemon(item[0], pokemon);
 
           return acc;
       }, {});
     });
   }
 
-  // добавление покемона попытка через цикл - покемоны удваиваются
-  // const addNewPokemon = () => {
-  //   Object.entries(allPokemons).map(([key, value]) => {
-  //     if (value.id === 17) { // id определенного покемона
-  //       const pokemonToDb = {...value};
-  //       console.log('#pokemonToDb: ', pokemonToDb);
-  //       const newKey = database.ref().child('pokemons').push().key;
-  //       database.ref('pokemons/' + newKey).set(pokemonToDb).then(() => getPokemons());
-  //       //setAllPokemons({...allPokemons, newKey: pokemonToDb});
-  //     }
-  //   });
-  // }
-
-  const data = {
+  const DATA = {
     "abilities": [
       "keen-eye",
       "tangled-feet",
@@ -77,14 +64,14 @@ const GamePage = () => {
     }
   };
 
-  const addNewPokemon = () => {
-    const newKey = database.ref().child('pokemons').push().key;
-    database.ref('pokemons/' + newKey).set(data).then(() => getPokemons());
+  const handleAddPokemon = () => {
+    const data = DATA;
+    firebase.addPokemon(data);
   }
 
   return (
       <>
-      <button className={s.center} onClick={addNewPokemon}>Add new pokemon</button>
+      <button className={s.center} onClick={handleAddPokemon}>Add new pokemon</button>
       <div className={s.flex}>
           {
             Object.entries(allPokemons).map(([key, value]) => <PokemonCard

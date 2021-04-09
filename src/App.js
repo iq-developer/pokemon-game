@@ -13,7 +13,10 @@ import NotFound from './routes/NotFound';
 import MenuHeader from './components/MenuHeader';
 import Footer from './components/Footer';
 
-import s from './style.module.css'
+import s from './style.module.css';
+
+import {FirebaseContext} from './context/firebaseContext'
+import Firebase from './service/firebase';
 
 
 
@@ -29,29 +32,30 @@ const App = () => {
   console.log('####: match', match);
 
   return (
+      <FirebaseContext.Provider value={new Firebase()} >
+        <Switch>
+          <Route path='/404' component={NotFound} />
+          <Route>
+            <>
+              <MenuHeader bgActive={!match.isExact} />
+                <div className={cn(s.wrap, {[s.isHomePage]: match.isExact})}>
+                  <Switch>
+                    <Route path='/' exact component={HomePage} />
+                    <Route path='/wellcome' component={HomePage} />
+                    <Route path='/game' component={GamePage} />
+                    <Route path='/about' component={AboutPage} />
+                    <Route path='/contact' component={ContactPage} />
+                    <Route render={() =>(
+                      <Redirect to='/404' />
+                    )} />
+                  </Switch>
+                </div>
+              <Footer />
+            </>
+          </Route>
 
-      <Switch>
-        <Route path='/404' component={NotFound} />
-        <Route>
-          <>
-            <MenuHeader bgActive={!match.isExact} />
-              <div className={cn(s.wrap, {[s.isHomePage]: match.isExact})}>
-                <Switch>
-                  <Route path='/' exact component={HomePage} />
-                  <Route path='/wellcome' component={HomePage} />
-                  <Route path='/game' component={GamePage} />
-                  <Route path='/about' component={AboutPage} />
-                  <Route path='/contact' component={ContactPage} />
-                  <Route render={() =>(
-                    <Redirect to='/404' />
-                  )} />
-                </Switch>
-              </div>
-            <Footer />
-          </>
-        </Route>
-
-      </Switch>
+        </Switch>
+      </FirebaseContext.Provider>
 
   );
 
