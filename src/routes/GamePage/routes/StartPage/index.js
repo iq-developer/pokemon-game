@@ -1,12 +1,15 @@
 import s from "./style.module.css";
-import {useState, useEffect, useContext} from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { useHistory } from "react-router-dom";
 import PokemonCard from "../../../../PokemonCard";
-import database from '../../../../service/firebase';
 import { FirebaseContext } from "../../../../context/firebaseContext";
+import { PokemonContext } from "../../../../context/pokemonContext";
 
 const Game = () => {
   const firebase = useContext(FirebaseContext);
+  const pokemonsContext = useContext(PokemonContext);
   const [pokemons, setPokemons] = useState({});
+  const history = useHistory();
 
   useEffect(() => {
     firebase.getPokemonSoket((pokemons) => {
@@ -16,8 +19,9 @@ const Game = () => {
     return () => firebase.offPokemonSoket();
   }, []);
 
-  // разворот карточки
   const handleChangeSelected = (key) => {
+    const pokemon = { ...pokemons[key] };
+    pokemonsContext.onSelectedPokemons(key, pokemon);
     setPokemons(prevState => ({
       ...prevState,
       [key]: {
@@ -27,30 +31,40 @@ const Game = () => {
     }))
   }
 
+  const handleStartGameClick = () => {
+    history.push('/game/board');
+  }
 
 
   return (
-      <>
+    <>
       <div className={s.buttonWrap}>
-        <button>Start Game</button>
+        <button
+          onClick={handleStartGameClick}
+          disabled={Object.keys(pokemonsContext.pokemons).length < 5}
+        >Start Game</button>
       </div>
       <div className={s.flex}>
-          {
-            Object.entries(pokemons).map(([key, value]) => <PokemonCard
-              className={s.card}
-              key={value.id}
-              id={value.id}
-              name={value.name}
-              type={value.type}
-              values={value.values}
-              img={value.img}
-              isActive={true}
-              isSelected={value.selected}
-              handleActive={() => handleChangeSelected(key)}
-            />)
-          }
+        {
+          Object.entries(pokemons).map(([key, { name, img, id, type, values, selected }]) => <PokemonCard
+            className={s.card}
+            key={id}
+            id={id}
+            name={name}
+            type={type}
+            values={values}
+            img={img}
+            isActive={true}
+            isSelected={selected}
+            onClickCard={() => {
+              if (Object.keys(pokemonsContext.pokemons).length < 5 || selected) {
+                handleChangeSelected(key);
+              }
+            }}
+          />)
+        }
       </div>
-      </>
+    </>
   )
 }
 

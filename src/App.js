@@ -1,5 +1,5 @@
-import {useState} from 'react';
-import {useRouteMatch, Route, Switch, Redirect} from 'react-router-dom';
+import { useState } from 'react';
+import { useLocation, useRouteMatch, Route, Switch, Redirect } from 'react-router-dom';
 
 import cn from 'classnames';
 
@@ -15,58 +15,47 @@ import Footer from './components/Footer';
 
 import s from './style.module.css';
 
-import {FirebaseContext} from './context/firebaseContext'
+import { FirebaseContext } from './context/firebaseContext'
 import Firebase from './service/firebase';
 
 
 
 const App = () => {
-  const [page, setPage] = useState('app');
 
-  const handleChangePage = (page) => {
-    console.log('###: <Main />');
-    setPage(page);
-  }
-
-  const match = useRouteMatch('/');
-  console.log('####: match', match);
+  const location = useLocation();
+  const isPadding = location.pathname === '/' || location.pathname === '/game/board';
 
   return (
-      <FirebaseContext.Provider value={new Firebase()} >
-        <Switch>
-          <Route path='/404' component={NotFound} />
-          <Route>
-            <>
-              <MenuHeader bgActive={!match.isExact} />
-                <div className={cn(s.wrap, {[s.isHomePage]: match.isExact})}>
-                  <Switch>
-                    <Route path='/' exact component={HomePage} />
-                    <Route path='/wellcome' component={HomePage} />
-                    <Route path='/game' component={GamePage} />
-                    <Route path='/about' component={AboutPage} />
-                    <Route path='/contact' component={ContactPage} />
-                    <Route render={() =>(
-                      <Redirect to='/404' />
-                    )} />
-                  </Switch>
-                </div>
-              <Footer />
-            </>
-          </Route>
+    <FirebaseContext.Provider value={new Firebase()} >
+      <Switch>
+        <Route path='/404' render={() => (
+          <h1>404 Not Found</h1>
+        )} />
+        <Route>
+          <>
+            <MenuHeader bgActive={!isPadding} />
+            <div className={cn(s.wrap, {
+              [s.isHomePage]: isPadding
+            })}>
+              <Switch>
+                <Route path='/' exact component={HomePage} />
+                <Route path='/wellcome' component={HomePage} />
+                <Route path='/game' component={GamePage} />
+                <Route path='/about' component={AboutPage} />
+                <Route path='/contact' component={ContactPage} />
+                <Route render={() => (
+                  <Redirect to='/404' />
+                )} />
+              </Switch>
+            </div>
+            <Footer />
+          </>
+        </Route>
 
-        </Switch>
-      </FirebaseContext.Provider>
+      </Switch>
+    </FirebaseContext.Provider>
 
   );
-
-  // switch (page) {
-  //   case 'app':
-  //     return <HomePage onChangePage={handleChangePage} />
-  //   case 'game':
-  //     return <GamePage onChangePage={handleChangePage} />
-  //   default:
-  //     return <HomePage />
-  // }
 
 }
 
