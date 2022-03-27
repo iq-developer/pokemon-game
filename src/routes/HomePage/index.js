@@ -21,7 +21,7 @@ const HomePage = ({onChangePage}) => {
       <MenuHeader />
       <Header
         title='Pokemon Game'
-        descr='short description of the game'
+        descr='Triple triad game'
         onClickButton={handleClickButton}
       />
       <Layout
