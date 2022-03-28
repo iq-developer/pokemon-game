@@ -10,10 +10,10 @@ const counterWin = (board, player1, player2) => {
   let player2Count = player2.length;
 
   board.forEach(item => {
-    if (item.card.posession === 'red') {
+    if (item.card.possession === 'red') {
       player2Count++;
     }
-    if (item.card.posession === 'blue') {
+    if (item.card.possession === 'blue') {
       player1Count++;
     }
   });
@@ -27,7 +27,7 @@ const BoardPage = () => {
   const [player1, setPlayer1] = useState(() => {
     return Object.values(pokemons).map(item => ({
       ...item,
-      posession: 'blue',
+      possession: 'blue',
     }))
   });
   const [player2, setPlayer2] = useState([]);
@@ -46,7 +46,7 @@ const BoardPage = () => {
     setPlayer2(() => {
       return player2Request.data.map(item => ({
         ...item,
-        posession: 'red',
+        possession: 'red',
       }))
     });
 
@@ -57,8 +57,6 @@ const BoardPage = () => {
   }
 
   const handleClickBoardPlate = async (position) => {
-    console.log('position: ', position);
-    console.log('choiceCard: ', choiceCard);
 
     if (choiceCard) {
       const params = {
@@ -76,7 +74,8 @@ const BoardPage = () => {
       });
 
       const request = await res.json();
-      console.log('request: ', request);
+      setBoard(request.data);
+      console.log('request.data:', request.data)
 
       if (choiceCard.player === 1) {
         setPlayer1(prevState => prevState.filter((item) => item.id !== choiceCard.id));
