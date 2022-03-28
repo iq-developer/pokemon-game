@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { useLocation, useRouteMatch, Route, Switch, Redirect } from 'react-router-dom';
+import { useLocation, Route, Switch, Redirect } from 'react-router-dom';
 
 import cn from 'classnames';
 
@@ -28,9 +27,7 @@ const App = () => {
   return (
     <FirebaseContext.Provider value={new Firebase()} >
       <Switch>
-        <Route path='/404' render={() => (
-          <h1>404 Not Found</h1>
-        )} />
+        <Route path='/404' component={NotFound} />
         <Route>
           <>
             <MenuHeader bgActive={!isPadding} />

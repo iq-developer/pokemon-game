@@ -18,7 +18,7 @@ const counterWin = (board, player1, player2) => {
     }
   });
 
-  return [player2Count, player2Count];
+  return [player1Count, player2Count];
 }
 
 const BoardPage = () => {
@@ -104,7 +104,7 @@ const BoardPage = () => {
         alert('DRAW');
       }
     }
-  }, [steps]);
+  }, [steps, board, player1, player2]);
 
 
   return (

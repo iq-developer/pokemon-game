@@ -1,4 +1,4 @@
-import { useRouteMatch, Route, Switch, Redirect } from 'react-router-dom';
+import { useRouteMatch, Route, Switch } from 'react-router-dom';
 import StartPage from './routes/StartPage';
 import BoardPage from './routes/BoardPage';
 import FinishPage from './routes/FinishPage';
