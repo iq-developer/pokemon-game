@@ -93,6 +93,11 @@
   border: 12px solid #d982a5;
 }
 
+.pokemonCard:active .wrap.front::after,
+.pokemonCard:focus .wrap.front::after {
+  border-color: var(--rock);
+}
+
 .wrap.back {
   z-index: -1;
   background-image: url(./../assets/card-back-side.jpg);

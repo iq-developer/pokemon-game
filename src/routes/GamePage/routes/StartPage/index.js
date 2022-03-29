@@ -38,11 +38,15 @@ const Game = () => {
 
   return (
     <>
+
       <div className={s.buttonWrap}>
+      <div className={s.message}>
+        <h1>Choose 5 pokemons to play</h1>
+      </div>
         <button
           onClick={handleStartGameClick}
           disabled={Object.keys(pokemonsContext.pokemons).length < 5}
-        >Start Game</button>
+        >Play</button>
       </div>
       <div className={s.flex}>
         {
