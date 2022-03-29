@@ -1,4 +1,4 @@
-import { useLocation, Route, Switch, Redirect } from 'react-router-dom';
+import { useLocation, Route, Switch } from 'react-router-dom';
 
 import cn from 'classnames';
 
@@ -6,7 +6,6 @@ import GamePage from './routes/GamePage';
 import HomePage from './routes/HomePage';
 
 import AboutPage from './routes/AboutPage';
-import ContactPage from './routes/ContactPage';
 import NotFound from './routes/NotFound';
 
 import MenuHeader from './components/MenuHeader';
@@ -36,13 +35,12 @@ const App = () => {
             })}>
               <Switch>
                 <Route path='/' exact component={HomePage} />
-                <Route path='/wellcome' component={HomePage} />
                 <Route path='/game' component={GamePage} />
                 <Route path='/about' component={AboutPage} />
-                <Route path='/contact' component={ContactPage} />
-                <Route render={() => (
+                <Route path='/' component={HomePage} />
+                {/* <Route render={() => (
                   <Redirect to='/404' />
-                )} />
+                )} /> */}
               </Switch>
             </div>
             <Footer />

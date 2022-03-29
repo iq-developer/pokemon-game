@@ -1,6 +1,6 @@
 import s from './style.module.css';
 import cn from 'classnames';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const MENU = [
   {
@@ -15,13 +15,9 @@ const MENU = [
     title: 'ABOUT',
     to: 'about',
   },
-  {
-    title: 'CONTACT',
-    to: 'contact',
-  },
 ]
 
-const Menu = ({isOpen, onClickHamburg}) => {
+const Menu = ({ isOpen, onClickHamburg }) => {
 
   return (
     <div className={cn(s.menuContainer, {

@@ -23,11 +23,11 @@
 
 @keyframes stars-move-in {
   from {
-      background-position-y: -100px;
+    background-position-y: -100px;
   }
   to {
-      opacity: 1;
-      background-position-y: 0;
+    opacity: 1;
+    background-position-y: 0;
   }
 }
 
@@ -35,7 +35,8 @@
   position: absolute;
   bottom: -300px;
   left: 0;
-  background: url(https://raw.githubusercontent.com/yagoestevez/fcc-portfolio/master/src/Images/Trees.svg?sanitize=true) bottom left repeat-x;
+  background: url(https://raw.githubusercontent.com/yagoestevez/fcc-portfolio/master/src/Images/Trees.svg?sanitize=true)
+    bottom left repeat-x;
   background-size: cover;
   width: 100%;
   height: 80%;
@@ -46,11 +47,11 @@
 
 @keyframes forest-move-in {
   from {
-      background-position-y: 150%;
+    background-position-y: 150%;
   }
   to {
-      opacity: 1;
-      background-position-y: 100%;
+    opacity: 1;
+    background-position-y: 100%;
   }
 }
 
@@ -58,7 +59,8 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  background: url(https://raw.githubusercontent.com/yagoestevez/fcc-portfolio/master/src/Images/Silhouette.svg?sanitize=true) bottom left no-repeat;
+  background: url(https://raw.githubusercontent.com/yagoestevez/fcc-portfolio/master/src/Images/Silhouette.svg?sanitize=true)
+    bottom left no-repeat;
   width: 50%;
   height: 50%;
   opacity: 0;
@@ -67,11 +69,11 @@
 
 @keyframes silhouette-move-in {
   from {
-      background-position-x: 0;
+    background-position-x: 0;
   }
   to {
-      opacity: 1;
-      background-position-x: 50%;
+    opacity: 1;
+    background-position-x: 50%;
   }
 }
 
@@ -80,8 +82,9 @@
   top: 0;
   right: 0;
   position: fixed;
-  background: url(https://raw.githubusercontent.com/yagoestevez/fcc-portfolio/master/src/Images/Moon.svg?sanitize=true) right 150% no-repeat;
-  background-size: 30% 30%;
+  background: url(https://raw.githubusercontent.com/yagoestevez/fcc-portfolio/master/src/Images/Moon.svg?sanitize=true)
+    right 150% no-repeat;
+  background-size: 40% 40%;
   background-attachment: fixed;
   width: 100%;
   height: 100%;
@@ -92,12 +95,12 @@
 
 @keyframes moon-move-in {
   from {
-      opacity: 0;
-      background-position: right 150%;
+    opacity: 0;
+    background-position: right 150%;
   }
   to {
-      opacity: 1;
-      background-position: top right;
+    opacity: 1;
+    background-position: top right;
   }
 }
 
@@ -106,7 +109,7 @@
   position: absolute;
   right: 0;
   top: 50%;
-  left: 55%;
+  left: 50%;
   opacity: 0;
   transform: translate(-50%, -50%);
   animation: text-fade-in 1000ms 800ms forwards;
@@ -114,24 +117,24 @@
 
 @keyframes text-fade-in {
   from {
-      right: 0;
+    right: 0;
   }
   to {
-      opacity: 1;
-      right: 25%;
+    opacity: 1;
+    right: 25%;
   }
 }
 
 .container h1 {
-  font-size: 65px;
+  font-size: 90px;
   font-weight: normal;
   font-style: italic;
   color: #fafafa;
-  line-height: 65px;
+  line-height: 90px;
 }
 
 .container p {
-  font-size: 28px;
+  font-size: 38px;
   font-weight: normal;
   color: #fafafa;
   line-height: 32px;
@@ -140,24 +143,24 @@
 
 @media only screen and (max-width: 649px) {
   .container {
-      right: 50%;
-      top: 10%;
-      width: 80%;
-      transform: translate(50%, 0);
-      animation: text-fade-in 1000ms 800ms forwards;
+    right: 50%;
+    top: 10%;
+    width: 80%;
+    transform: translate(50%, 0);
+    animation: text-fade-in 1000ms 800ms forwards;
   }
 
   @keyframes text-fade-in {
-      from {
-          right: 0;
-      }
-      to {
-          opacity: 1;
-          right: 50%;
-      }
+    from {
+      right: 0;
+    }
+    to {
+      opacity: 1;
+      right: 50%;
+    }
   }
 
   .silhouette {
-      width: 100%;
+    width: 100%;
   }
 }

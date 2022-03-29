@@ -6,20 +6,23 @@ import { useState } from 'react';
 const PlayerBoard = ({ cards, onClickCard, player }) => {
   const [isSelected, setSelected] = useState(null);
 
+  const isPlayer2 = player === 2;
+
   return (
     <>
       {
         cards.map((item) => (
           <div
             className={cn(s.cardBoard, {
-              [s.selected]: isSelected === item.id
+              [s.selected]: isSelected === item.id,
+              [s.player2]: isPlayer2,
             })}
             onClick={() => {
               setSelected(item.id);
               onClickCard && onClickCard({
                 player,
                 ...item,
-                });
+              });
             }}
           >
             <PokemonCard
@@ -31,6 +34,7 @@ const PlayerBoard = ({ cards, onClickCard, player }) => {
               img={item.img}
               minimize
               isActive
+              isPlayer2={isPlayer2}
             />
           </div>
         ))

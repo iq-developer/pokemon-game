@@ -146,13 +146,13 @@
 }
 
 .menuContainer ul li a {
-  font-size: 3rem;
+  font-size: 5rem;
   padding-left: .5rem;
 }
 
 .menuContainer ul li a::after {
   content: ' »';
-  font-size: 2.5rem;
+  font-size: 5rem;
   color: transparent;
   transition: color 200ms;
 }

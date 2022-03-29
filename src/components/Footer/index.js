@@ -1,11 +1,11 @@
-import style from './style.module.css';
+import s from './style.module.css';
 
 const Footer = () => {
   return (
     <footer>
-        <div className={style.wrapper}>
+        <div className={s.wrapper}>
             <h3>THANKS FOR VISITING</h3>
-            <p>© 2021 #ReactMarathon.</p>
+            <p>© 2021 - 2022 #ReactMarathon.</p>
         </div>
     </footer>
   );

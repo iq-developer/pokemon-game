@@ -8,7 +8,7 @@ const Navbar = ({isOpen, bgActive = false, onClickHamburg}) => {
     })}>
       <div className={s.navWrapper} onClick={onClickHamburg}>
         <p className={s.brand}>
-          LOGO
+          Pokemons
         </p>
         <div className={cn(s.menuButton, {
           [s.active]: isOpen

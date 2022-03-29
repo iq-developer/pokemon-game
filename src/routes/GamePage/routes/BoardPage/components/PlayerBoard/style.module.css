@@ -10,5 +10,9 @@
 }
 
 .cardBoard.selected {
-  margin-left: -20px;
+  margin-left: 40px;
+}
+
+.cardBoard.player2.selected {
+  margin-left: -40px;
 }
