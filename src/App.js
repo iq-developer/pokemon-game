@@ -1,4 +1,4 @@
-import { useLocation, Route, Switch } from 'react-router-dom';
+import { useLocation, Route, Switch, Redirect } from 'react-router-dom';
 
 import cn from 'classnames';
 
@@ -35,12 +35,13 @@ const App = () => {
             })}>
               <Switch>
                 <Route path='/' exact component={HomePage} />
+                <Route path="/home" render={() => <Redirect to="/" />} />
+                <Route path="/pokemon-game" render={() => <Redirect to="/" />} />
                 <Route path='/game' component={GamePage} />
                 <Route path='/about' component={AboutPage} />
-                <Route path='/' component={HomePage} />
-                {/* <Route render={() => (
+                <Route render={() => (
                   <Redirect to='/404' />
-                )} /> */}
+                )} />
               </Switch>
             </div>
             <Footer />
