@@ -3,10 +3,12 @@ import { useContext, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import PokemonCard from './../../../../PokemonCard';
 import { PokemonContext } from "../../../../context/pokemonContext";
+import { FirebaseContext } from "../../../../context/firebaseContext";
 
-const FinishPage = (result) => {
-  const { pokemons, player2Pokemons, gameResult, } = useContext(PokemonContext);
+const FinishPage = () => {
+  const { pokemons, player2Pokemons, gameResult } = useContext(PokemonContext);
   const history = useHistory();
+  const firebase = useContext(FirebaseContext);
   const resultData = {
     win: {
       title: 'You win',
@@ -31,17 +33,30 @@ const FinishPage = (result) => {
   }
   const [resultPokemons, setResultPokemons] = useState(resultData[gameResult].cards);
 
-  const handleRemoveSelected = (key) => {
+  const handleRemoveSelected = (key, gameResult) => {
 
+    /* to add class "removed" and show animation */
     setResultPokemons(prevState => {
       const newState = { ...prevState };
       newState[key].isRemoved = true;
       return newState;
     });
 
-    // database update
+    switch (gameResult) {
+      case 'win':
+        firebase.addPokemon(resultPokemons[key], () => console.log('addPokemon: ', resultPokemons[key]));
 
-    // setTimeout(() => history.push('/game'), 1000);
+        break;
+      case 'loose':
+        firebase.removePokemon(key, () => console.log('removePokemon: ', resultPokemons[key]));
+
+        break;
+      default:
+        console.log('Error: ', 'run handleRemoveSelected with wrong gameResult');
+        break;
+    }
+
+    setTimeout(() => history.push('/game'), 1000);
   }
 
   return (
@@ -66,9 +81,7 @@ const FinishPage = (result) => {
             isSelected={selected}
             isRemoved={isRemoved}
             onClickCard={() => {
-              if (resultData[gameResult].title === 'win') {
-                handleRemoveSelected(key);
-              }
+              handleRemoveSelected(key, gameResult);
             }}
 
           />)

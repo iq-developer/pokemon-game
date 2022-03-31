@@ -13,6 +13,7 @@ const PlayerBoard = ({ cards, onClickCard, player }) => {
       {
         cards.map((item) => (
           <div
+            key = {item.id}
             className={cn(s.cardBoard, {
               [s.selected]: isSelected === item.id,
               [s.player2]: isPlayer2,
