@@ -21,8 +21,14 @@ const counterWin = (board, player1, player2) => {
   return [player1Count, player2Count];
 }
 
+/*
+player1, player2 - left and right cards stacks
+pokemonsContext.pokemons - selected pokemons
+pokemons - all my pokemons, include selected (from context)
+*/
+
 const BoardPage = () => {
-  const { pokemons } = useContext(PokemonContext);
+  const { pokemons, setGameResult, setPlayer2Pokemons } = useContext(PokemonContext);
   const [board, setBoard] = useState([]);
   const [player1, setPlayer1] = useState(() => {
     return Object.values(pokemons).map(item => ({
@@ -42,6 +48,8 @@ const BoardPage = () => {
 
     const player2Response = await fetch('https://reactmarathon-api.netlify.app/api/create-player');
     const player2Request = await player2Response.json();
+
+    setPlayer2Pokemons(player2Request.data);
 
     setPlayer2(() => {
       return player2Request.data.map(item => ({
@@ -75,7 +83,6 @@ const BoardPage = () => {
 
       const request = await res.json();
       setBoard(request.data);
-      console.log('request.data:', request.data)
 
       if (choiceCard.player === 1) {
         setPlayer1(prevState => prevState.filter((item) => item.id !== choiceCard.id));
@@ -87,7 +94,7 @@ const BoardPage = () => {
 
       setBoard(request.data);
 
-      setSteps(prevState => prevState++);
+      setSteps(prevState => ++prevState);
 
     }
   }
@@ -97,12 +104,13 @@ const BoardPage = () => {
       const [count1, count2] = counterWin(board, player1, player2);
 
       if (count1 > count2) {
-        alert('WIN');
+        setGameResult('win');
       } else if (count1 < count2) {
-        alert('LOOSE');
+        setGameResult('loose');
       } else {
-        alert('DRAW');
+        setGameResult('draw');
       }
+      history.replace('/game/finish');
     }
   }, [steps, board, player1, player2]);
 

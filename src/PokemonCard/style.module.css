@@ -253,3 +253,8 @@
   transform: translate(-50%, 0);
   bottom: 0;
 }
+
+.removed {
+  transition-duration: 1s;
+  transform: translate(0, 150%) !important;
+}

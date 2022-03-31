@@ -3,10 +3,10 @@ import cn from 'classnames';
 import s from './style.module.css';
 
 
-const PokemonCard = ({ className, name, img, id, type, values, minimize, isActive, isSelected, onClickCard, possession, isPlayer2 }) => {
+const PokemonCard = ({ className, name, img, id, type, values, minimize, isActive, isSelected, onClickCard, possession, isPlayer2, isRemoved }) => {
 
   const handleClickCard = () => {
-    onClickCard && onClickCard(id);
+    !isRemoved && onClickCard && onClickCard(id);
   }
 
   return (
@@ -14,6 +14,7 @@ const PokemonCard = ({ className, name, img, id, type, values, minimize, isActiv
       className={cn(className, s.pokemonCard, {
         [s.active]: isActive,
         [s.selected]: isSelected,
+        [s.removed]: isRemoved,
       })}
       onClick={handleClickCard}
     >
