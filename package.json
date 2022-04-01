@@ -1,6 +1,6 @@
 {
   "homepage": "http://iq-developer.github.io/pokemon-game",
-  "name": "pokemon-game",
+  "name": "poks",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
