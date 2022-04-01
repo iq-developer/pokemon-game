@@ -36,7 +36,11 @@ const App = () => {
               <Switch>
                 <Route path='/' exact component={HomePage} />
                 <Route path="/home" render={() => <Redirect to="/" />} />
-                <Route path="/pokemon-game" render={() => <Redirect to="/" />} />
+
+                <Route path="/home" render={() => <Redirect to="/" />} />
+                {/* <Route path="/pokemon-game" render={() => <Redirect to="/" />} /> */}
+                <Route path="/game/about" render={() => <Redirect to="/about" />} />
+                <Route path="/game/game" render={() => <Redirect to="/game" />} />
                 <Route path='/game' component={GamePage} />
                 <Route path='/about' component={AboutPage} />
                 <Route render={() => (

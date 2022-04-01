@@ -40,7 +40,7 @@ const Game = () => {
     <>
       <div className={s.buttonWrap}>
         <div className={s.message}>
-          <h1>Choose 5 pokemons to play</h1>
+          <h1>Choose 5 cards to play</h1>
         </div>
         <button
           onClick={handleStartGameClick}

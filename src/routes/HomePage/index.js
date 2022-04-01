@@ -14,7 +14,7 @@ const HomePage = ({ onChangePage }) => {
     <>
 
       <Header
-        title='Pokemons'
+        title='Poks'
         descr='Triple triad card game'
         onClickButton={handleClickButton}
       />

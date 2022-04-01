@@ -12,7 +12,7 @@ const Navbar = ({ isOpen, bgActive = false, onClickHamburg }) => {
         <p>
           <Link to={'/'}>
             <span className={s.brand}>
-              Pokemons
+              Poks
             </span>
           </Link>
         </p>
