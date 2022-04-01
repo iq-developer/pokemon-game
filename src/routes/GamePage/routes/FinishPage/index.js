@@ -36,19 +36,25 @@ const FinishPage = () => {
   const handleRemoveSelected = (key, gameResult) => {
 
     /* to add class "removed" and show animation */
-    setResultPokemons(prevState => {
-      const newState = { ...prevState };
-      newState[key].isRemoved = true;
-      return newState;
-    });
+
 
     switch (gameResult) {
       case 'win':
-        firebase.addPokemon(resultPokemons[key], () => console.log('addPokemon: ', resultPokemons[key]));
+        firebase.addPokemon(resultPokemons[key],
+          () => setResultPokemons(prevState => {
+            const newState = { ...prevState };
+            newState[key].isRemoved = true;
+            return newState;
+          }));
 
         break;
       case 'loose':
-        firebase.removePokemon(key, () => console.log('removePokemon: ', resultPokemons[key]));
+        firebase.removePokemon(key,
+          () => setResultPokemons(prevState => {
+            const newState = { ...prevState };
+            newState[key].isRemoved = true;
+            return newState;
+          }));
 
         break;
       default:
